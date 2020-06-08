@@ -65,8 +65,7 @@ class App extends Component {
     credit.date = date.toISOString().substring(0,10);
     let newCredit = [credit,...this.state.credits];
     this.setState({credits: newCredit});
-    console.log(credit.amount);
-    this.setState({accountBalance: this.state.accountBalance+credit.amount});
+    this.setState({accountBalance: this.state.accountBalance+ parseInt(credit.amount)});
   }
     render(){
       const HomeComponent = () => (<Home accountBalance={this.state.accountBalance}/>);
