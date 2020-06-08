@@ -17,7 +17,7 @@ class Home extends Component{
                 <div></div>
                 <Link to="/credits">Credits</Link>
 
-                <AccountBalance accountBalance={this.props.accountBalance}/>
+                <AccountBalance accountBalance={Math.ceil(this.props.accountBalance*100)/100}/>
             </div>
         );
     }  

@@ -51,14 +51,31 @@ class App extends Component {
     newUser.userName = loginInfo.userName
     this.setState({currentUser:newUser})
   }
+
+  addDebit = (debit) =>{
+    let date = new Date();
+    debit.date = date.toISOString().substring(0,10);
+    let newDebit = [debit,...this.state.debits];
+    this.setState({debits: newDebit});
+    this.setState({accountBalance: this.state.accountBalance-debit.amount});
+  }
+
+  addCredit = (credit) =>{
+    let date = new Date();
+    credit.date = date.toISOString().substring(0,10);
+    let newCredit = [credit,...this.state.credits];
+    this.setState({credits: newCredit});
+    console.log(credit.amount);
+    this.setState({accountBalance: this.state.accountBalance+credit.amount});
+  }
     render(){
       const HomeComponent = () => (<Home accountBalance={this.state.accountBalance}/>);
       const UserProfileComponent = () => (
         <UserProfile userName={this.state.currentUser.userName} memberSince={this.state.currentUser.memberSince}/>
       );
       const LoginComponent = () => (<Login user={this.state.currentUser} mockLogin={this.mockLogin} {...this.props} />);
-      const DebitComponent = () => (<Debit debits={this.state.debits}/>)
-      const CreditComponent = () => (<Credit credits={this.state.credits}/> )
+      const DebitComponent = () => (<Debit debits={this.state.debits} addDebit = {this.addDebit}/>)
+      const CreditComponent = () => (<Credit credits={this.state.credits} addCredit={this.addCredit}/> )
       return(
         <Router>
           <Switch>

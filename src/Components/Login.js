@@ -32,7 +32,6 @@ class Login extends Component{
         if(this.state.redirect){
             return (<Redirect to="/userProfile"/>)
         }
-
         return(
             <div>
                 <form onSubmit={this.handleSubmit}>
